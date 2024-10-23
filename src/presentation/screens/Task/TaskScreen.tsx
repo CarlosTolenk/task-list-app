@@ -14,13 +14,14 @@ import {useState} from 'react';
 
 const TaskScreen = () => {
   const {tasks, addTask, handleRemoveTask} = useTaskViewModel();
-  console.log('El estado tiene', tasks);
   const [taskName, setTaskName] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
   const [taskDescription, setTaskDescription] = useState('');
 
   const renderItem = ({item}: {item: ITask}) => {
-    if (!item) return null;
+    if (!item) {
+      return null;
+    }
 
     return (
       <View style={styles.taskContainer}>
@@ -60,7 +61,7 @@ const TaskScreen = () => {
         onRequestClose={() => setModalVisible(false)}>
         <View style={styles.modalContainer}>
           <TextInput
-            placeholder="Nombre de la tarea"
+            placeholder="Name of task"
             value={taskName}
             onChangeText={setTaskName}
             style={styles.input}

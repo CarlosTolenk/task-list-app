@@ -1,5 +1,9 @@
 import {useDispatch, useSelector} from 'react-redux';
-import {addTask, selectTasks} from '../../../store/states/taskReducer';
+import {
+  addTask,
+  removeTask,
+  selectTasks,
+} from '../../../store/states/taskReducer';
 import {ITask} from '../../../store/models/task';
 
 interface ITaskViewModel {
@@ -13,12 +17,11 @@ export const useTaskViewModel = (): ITaskViewModel => {
   const tasks = useSelector(selectTasks);
 
   const addTaskHandler = (task: ITask) => {
-    console.log('Se tiene que crear');
     dispatch(addTask(task));
   };
 
   const handleRemoveTask = (id: number) => {
-    console.log(id);
+    dispatch(removeTask(id));
   };
 
   return {tasks, addTask: addTaskHandler, handleRemoveTask};
