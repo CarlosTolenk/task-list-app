@@ -1,39 +1,41 @@
+// HomeScreen.test.tsx
 import 'reflect-metadata';
-import {fireEvent, render} from '@testing-library/react-native';
-import HomeScreen from '../HomeScreen';
+import React from 'react';
+import {render, fireEvent} from '@testing-library/react-native';
+import {useHomeViewModel} from '../HomeViewModel';
+import {HomeScreen} from '../index';
 
-const mockUseDispatch = jest.fn();
-
-jest.mock('react-redux', () => {
-  const ActualReactRedux = jest.requireActual('react-redux');
-  return {
-    ...ActualReactRedux,
-    useDispatch: jest.fn().mockImplementation(() => {
-      return mockUseDispatch;
-    }),
-  };
-});
+jest.mock('../HomeViewModel');
 
 describe('HomeScreen', () => {
-  test('should renders correctly', async () => {
-    const {getByText} = render(<HomeScreen />);
+  const onNavigationMock = jest.fn();
 
-    const textDefault = getByText(/Home/i);
-    const button = getByText(/LogOut/i);
-
-    expect(textDefault).toBeDefined();
-    expect(button).toBeDefined();
+  beforeEach(() => {
+    (useHomeViewModel as jest.Mock).mockReturnValue({
+      onNavigation: onNavigationMock,
+    });
   });
 
-  test('should dispatch the action to log out when the button is pressed', () => {
+  it('should render correctly', () => {
     const {getByText} = render(<HomeScreen />);
 
-    const button = getByText(/LogOut/i);
-    fireEvent.press(button);
+    expect(getByText(/Tasks/i)).toBeTruthy();
+    expect(getByText(/List/i)).toBeTruthy();
+  });
 
-    expect(mockUseDispatch).toHaveBeenCalledWith({
-      payload: undefined,
-      type: 'auth/authLogOut',
-    });
+  it('should navigate to Tasks on button press', () => {
+    const {getByText} = render(<HomeScreen />);
+
+    fireEvent.press(getByText(/Tasks/i));
+
+    expect(onNavigationMock).toHaveBeenCalledWith('Task');
+  });
+
+  it('should navigate to List on button press', () => {
+    const {getByText} = render(<HomeScreen />);
+
+    fireEvent.press(getByText(/List/i));
+
+    expect(onNavigationMock).toHaveBeenCalledWith('List');
   });
 });

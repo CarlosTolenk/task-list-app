@@ -11,6 +11,10 @@ module.exports = {
       babelConfig: true,
     },
   },
+  moduleNameMapper: {
+    '\\.(jpg|jpeg|png|gif|svg)$': 'identity-obj-proxy',
+    '\\.(css|less)$': 'identity-obj-proxy',
+  },
   coveragePathIgnorePatterns: ['/node_modules/', 'module.ts'],
   cacheDirectory: '.jest/cache',
 };
