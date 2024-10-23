@@ -26,12 +26,12 @@ const AppRouter = () => {
         <Stack.Screen
           name={TASK}
           component={TaskScreen}
-          options={{headerShown: false, navigationBarHidden: true}}
+          options={{headerShown: true, navigationBarHidden: true}}
         />
         <Stack.Screen
           name={LIST}
           component={ListScreen}
-          options={{headerShown: false, navigationBarHidden: true}}
+          options={{headerShown: true, navigationBarHidden: true}}
         />
       </Stack.Navigator>
     </NavigationContainer>
