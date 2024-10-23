@@ -16,7 +16,6 @@ const TaskScreen = () => {
   const {tasks, addTask, handleRemoveTask} = useTaskViewModel();
   const [taskName, setTaskName] = useState('');
   const [modalVisible, setModalVisible] = useState(false);
-  const [taskDescription, setTaskDescription] = useState('');
 
   const renderItem = ({item}: {item: ITask}) => {
     if (!item) {
@@ -37,11 +36,10 @@ const TaskScreen = () => {
     const newTask: ITask = {
       id: Date.now(),
       name: taskName,
-      description: taskDescription,
+      description: '',
     };
     addTask(newTask);
     setTaskName('');
-    setTaskDescription('');
     setModalVisible(false);
   };
 
@@ -69,7 +67,7 @@ const TaskScreen = () => {
           <View style={styles.containerButton}>
             <Button title="Cancelar" onPress={() => setModalVisible(false)} />
             <Button
-              title="Add"
+              title="Add Task"
               disabled={taskName === ''}
               onPress={handleAddTask}
             />
