@@ -27,11 +27,19 @@ const ListScreen = () => {
   };
 
   if (loading) {
-    return <ActivityIndicator size="large" color="#0000ff" />;
+    return (
+      <View style={styles.containerLoadingAndError}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
+    );
   }
 
   if (error) {
-    return <Text>{error}</Text>;
+    return (
+      <View style={styles.containerLoadingAndError}>
+        <Text>{error}</Text>
+      </View>
+    );
   }
 
   return (
@@ -43,6 +51,10 @@ const ListScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  containerLoadingAndError: {
+    flex: 1,
+    justifyContent: 'center',
+  },
   container: {
     flex: 1,
     padding: 14,
@@ -68,6 +80,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderRadius: 25,
     marginRight: 12,
+    backgroundColor: '#535050',
   },
   title: {
     fontSize: 18,

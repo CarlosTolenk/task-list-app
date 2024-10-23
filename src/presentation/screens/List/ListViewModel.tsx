@@ -24,7 +24,7 @@ export const useListViewModel = (): IListViewModel => {
         console.log(list);
         setList(list);
       } catch (error) {
-        setError('Error al obtener la lista');
+        setError('Error getting list');
       } finally {
         setLoading(false);
       }
