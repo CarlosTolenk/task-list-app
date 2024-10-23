@@ -3,7 +3,6 @@ import {getBindingDictionary} from 'inversify/lib/planning/planner';
 
 // Modules
 import {moduleShared} from '../modules/shared/module';
-import {moduleAuth} from '../modules/auth/module';
 import {moduleList} from '../modules/list/module';
 
 function copyDictionary(
@@ -38,4 +37,4 @@ function merge(
   return container;
 }
 
-export const container = merge(moduleShared, moduleAuth, moduleList);
+export const container = merge(moduleShared, moduleList);
