@@ -20,8 +20,8 @@ export const useListViewModel = (): IListViewModel => {
   useEffect(() => {
     const getList = async () => {
       try {
+        // eslint-disable-next-line @typescript-eslint/no-shadow
         const list = await getListUseCase.getAll();
-        console.log(list);
         setList(list);
       } catch (error) {
         setError('Error getting list');

@@ -29,7 +29,7 @@ const ListScreen = () => {
   if (loading) {
     return (
       <View style={styles.containerLoadingAndError}>
-        <ActivityIndicator size="large" color="#0000ff" />
+        <ActivityIndicator size="large" color="#0000ff" testID={'Loading'} />
       </View>
     );
   }
@@ -45,7 +45,11 @@ const ListScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.screenTitle}>List Screen</Text>
-      <CustomListGeneric data={list} renderItem={renderItem} />
+      {list.length > 0 ? (
+        <CustomListGeneric data={list} renderItem={renderItem} />
+      ) : (
+        <Text>There are no items in the list</Text>
+      )}
     </View>
   );
 };
