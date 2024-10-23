@@ -1,40 +1,38 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer, NavigationProp} from '@react-navigation/native';
 
-import {IGlobalStore} from '../store/interfaces';
-
 // Routes
-import {HOME, LOGIN, ScreenNames} from './routesPage';
+import {HOME, LIST, ScreenNames, TASK} from './routesPage';
 
 // Screens
 import {HomeScreen} from '../presentation/screens/Home';
-import {LoginScreen} from '../presentation/screens/Login';
+import {TaskScreen} from '../presentation/screens/Task';
+import {ListScreen} from '../presentation/screens/List';
 
 export type RootStackParamList = Record<ScreenNames[number], undefined>;
 export type StackNavigation = NavigationProp<RootStackParamList>;
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const AppRouter = () => {
-  const tokenSession = useSelector((state: IGlobalStore) => state.auth.token);
-
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {tokenSession === null ? (
-          <Stack.Screen
-            name={LOGIN}
-            component={LoginScreen}
-            options={{headerShown: false, navigationBarHidden: true}}
-          />
-        ) : (
-          <Stack.Screen
-            name={HOME}
-            component={HomeScreen}
-            options={{headerShown: false, navigationBarHidden: true}}
-          />
-        )}
+        <Stack.Screen
+          name={HOME}
+          component={HomeScreen}
+          options={{headerShown: false, navigationBarHidden: true}}
+        />
+        <Stack.Screen
+          name={TASK}
+          component={TaskScreen}
+          options={{headerShown: false, navigationBarHidden: true}}
+        />
+        <Stack.Screen
+          name={LIST}
+          component={ListScreen}
+          options={{headerShown: false, navigationBarHidden: true}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

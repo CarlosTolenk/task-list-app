@@ -1,42 +1,37 @@
-import React, {useState} from 'react';
-import {Button, Text, View, StyleSheet} from 'react-native';
+import React from 'react';
+import {Button, View, StyleSheet} from 'react-native';
 
 import {useHomeViewModel} from './HomeViewModel';
+import {LIST, ScreenValues, TASK} from '../../../router';
 
 const HomeScreen = () => {
-  const {logOut} = useHomeViewModel();
-  const [visible, setVisible] = useState(false);
+  const {onNavigation} = useHomeViewModel();
 
-  const toggleOverlay = () => {
-    setVisible(!visible);
-  };
-
-  const onHandlerLogOut = () => {
-    logOut();
+  const onHandlerNavigation = (route: ScreenValues) => {
+    onNavigation(route);
   };
 
   return (
-    <View>
-      <Text>Home</Text>
-      <Button title="Open Overlay" onPress={toggleOverlay} />
-      <Button title="LogOut" onPress={onHandlerLogOut} />
+    <View style={styles.container}>
+      <View style={styles.containerButton}>
+        <Button title="Tasks" onPress={() => onHandlerNavigation(TASK)} />
+      </View>
+      <View style={styles.containerButton}>
+        <Button title="List" onPress={() => onHandlerNavigation(LIST)} />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  button: {
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+    padding: 10,
+  },
+  containerButton: {
     margin: 10,
-  },
-  textPrimary: {
-    marginVertical: 20,
-    textAlign: 'center',
-    fontSize: 20,
-  },
-  textSecondary: {
-    marginBottom: 10,
-    textAlign: 'center',
-    fontSize: 17,
   },
 });
 
