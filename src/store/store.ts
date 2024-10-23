@@ -6,7 +6,7 @@ import {persistReducer, persistStore} from 'redux-persist';
 import {IGlobalStore} from './interfaces';
 
 // States
-import {authReducer} from './states';
+import {authReducer, taskReducer} from './states';
 
 const persistConfig = {
   key: 'root',
@@ -15,6 +15,7 @@ const persistConfig = {
 
 export const rootReducer = combineReducers<IGlobalStore>({
   auth: authReducer,
+  tasks: taskReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
